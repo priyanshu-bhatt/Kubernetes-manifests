@@ -1,0 +1,27 @@
+## Create User in Minikube
+
+sudo su -
+cd /var/lib/minikube/
+cd certs/
+
+openssl genrsa -out eric.key 1024
+openssl req -new -key eric.key -out eric.csr -subj '/CN=eric/O=tech'
+
+openssl x509 -req -in eric.csr -out eric.crt -CAkey ca.key -CA ca.crt -CAcreateserial
+
+## Copy the files -> ../ptofiles/.minikube
+sudo su -
+cd /var/lib/minikube/certs/
+cp eric.* /home/docker/
+chmod o+r eric.key
+
+
+
+
+
+
+
+
+kubectl create ns testing
+
+

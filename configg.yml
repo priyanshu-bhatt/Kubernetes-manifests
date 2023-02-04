@@ -1,0 +1,21 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: "mylabelcode1"
+  labels:
+    dc: In
+    Team: TeamA
+  
+spec:
+  containers:
+  - name: mylabelcont1
+    image: "vimal13/apache-webserver-php"
+    volumeMounts:
+    - mountPath: /etc/httpd/config.d/
+      name: myconfigname
+
+  volumes:
+  - configMap:
+      name: myconfig1
+    name: myconfigname
+  

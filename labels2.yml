@@ -1,0 +1,17 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: "mylabelcode"
+  labels:
+    dc: US
+    Team: TeamB
+  
+spec:
+  containers:
+    - name: mylabelcont1
+      image: "httpd"
+
+
+      #kubectl get pods --selector  Team=TeamA   //Equity Based
+      # kubectl get pods --selector "Team in (TeamA)"    // Set Based
+      # kubectl get pods -l Team=TeamA --show-labels // shows labels also

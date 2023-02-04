@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "my-cont-sec"
+  labels:
+    team: security
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      team: security
+  template:
+    metadata:
+      name: "template-container"
+      labels:
+          team: "security"
+    spec:
+      containers:
+      - name: "secured-cont"
+        image: vimal13/apache-webserver-php
+        
+        ports:
+        - containerPort: 80
+        securityContext:
+          capabilities:
+            drop: ["NET_RAW"]
+  

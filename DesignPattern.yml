@@ -1,0 +1,18 @@
+# We dont run two application in a single pod:
+# 1) As it will become a single point of failure
+# 2) sometimes we want to scale one but not other container in a pod
+
+# Still we use MULTI-CONTAINER setup in the pod wrt to different usecase:
+# 1) sidecar:
+# when we have to run a n agent program along with the main application container, agent is in a separate container in a single pod
+# as we inc the application container we also inc the agent container and this agent collects the logs from a centralized location shared
+# by both the containers in a pod and send it to splunk or other tool
+
+# 2) Adapter:
+# Same as sidecar but before sending it to a third party, it Transforms the data and then send,operationcalled ETL is performed by 
+# the agent i.e. Extract(extracting log directly from the container) transform( Transforming the logs to a specific format for the third party) 
+# load( loading the transformed log to the third party app).
+
+# 3) Adaptar:
+# The second container is a proxy container for to connect the main application container with the other database/other programs/pods , 
+# the proxy container acts as an intermediate between the main application container and the other pods.

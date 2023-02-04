@@ -1,0 +1,12 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: "mylabelcode3"
+  labels:
+    dc: In
+    Team: TeamA
+  
+spec:
+  containers:
+    - name: mylabelcont1
+      image: "httpd"

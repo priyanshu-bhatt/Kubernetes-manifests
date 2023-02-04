@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-new-pod-ns
+  labels:
+    namespace: Teama
+  namespace: teama
+spec:
+  containers:
+    - name: my-cont-teama
+      image: httpd
+# kubectl get ns
+#kubectl get pods n <NAMESPACES>
+#kubectl get  config view

@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+  labels:
+    app: wordpress
+spec:
+  ports:
+    - port: 3306
+  selector:
+    app: wordpress
+    Tier: mysql
+  type: ClusterIP
+  clusterIP: None
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-persis-claim
+  labels:
+    app: wordpress
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-wordpress-setup
+  labels:
+    app: wordpress
+spec:
+  selector:
+    matchLabels:
+      app: wordpress
+      Tier: mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      
+      labels:
+        app: wordpress
+        Tier: mysql
+    spec:
+      containers:
+      - image: mysql:5.6
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-pass
+              key: password
+        ports:
+        - containerPort: 3306
+          name: mysql
+        volumeMounts:
+        - name: mysql-persis-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-persis-storage
+        persistentVolumeClaim:
+          claimName: mysql-persis-claim

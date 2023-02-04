@@ -1,0 +1,8 @@
+# kubectl api-resources:
+#   - To check all the programs/resources available in the api and there shortnames, kind they belonog and namespaces
+
+# To create a custom resource we use CRD(custom resource defination) it is used to create resource which are not by defualt provided by kubernetes but 
+# are required for our custom requirement.
+
+# Create and define the list of all the inputs allowed in the resource in the crd file and apply , now we can create custom resource from the crd layout 
+#kind of we gave

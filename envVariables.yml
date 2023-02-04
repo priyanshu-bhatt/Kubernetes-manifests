@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "my-env-pod-2-applyv2"
+  labels:
+    dc: "IN"
+    Team: "prod"
+spec:
+  containers:
+    - name: "mycont1"
+      image: vimal13/apache-webserver-php
+      env:
+        - name: "my-env-resource"
+          value: "redhat"
+        - name: "password"
+          value: "this is password"
+        - name: "testing-Env-Works-After-Apply"
+          value: "No"    # These env variables are immutable 

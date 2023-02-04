@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: "replication1"
+  labels:
+    dc: In
+    Team: TeamC
+spec:
+  replicas: 3
+  selector:
+    dc: In
+  template:
+    metadata:
+      name: "mytemp-pod"
+      labels:
+        dc: In
+        Team: TeamA
+    spec:
+      containers:
+        - name: mytempcont
+          image: "vimal13/apache-webserver-php"
+
+          #kubectl expose --type=NodePort --port=80 rc/replication1
+          #kubectl get svc // see the random port
+          # minikube ip
+          # hit <minikube-ip>:frontend port
+          #kubectl expose pod vimal-image --type=NodePort --image=vimal13/apache-webserver-php

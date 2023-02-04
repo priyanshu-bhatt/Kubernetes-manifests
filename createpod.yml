@@ -1,0 +1,9 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: "mynewcode"
+  
+spec:
+  containers:
+    - name: "myc1"
+      image: "httpd"

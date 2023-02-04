@@ -1,0 +1,33 @@
+# Round Robin -> Launch one terminate one and so on, dont terintae until not launched
+# Recreate -> First teriminate all then recreate.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "new-yml-deployment"
+  labels: 
+    dc: UK
+    Team: Test
+spec:
+  replicas: 3
+  selector:
+    matchExpressions:
+      - {key: dc, operator: In,values: [UK]}
+  template:
+    metadata:
+      name: "cont-by-yml-deployment"
+      labels:
+        dc: UK
+        Team: Test
+    spec:
+      containers:
+        - name: "priyanshu"
+          image: vimal13/apache-webserver-php
+    
+    #kubectl create deployment <Deployment-name> --image=httpd
+    #kubectl scale deployment <Deployment-Name> --replicas=4
+    #kubectl expose deployment <Deployment-Name> --type=NodePort --port=80
+    #kubectl rollout  undo deployment <deployment-Name> ## To previous one
+    #kubectl rollout undo deployment <Deployment-Name> --to-revision=1
+
+    

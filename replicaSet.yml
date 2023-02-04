@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: "replica-set-example2"
+  labels:
+    dc: "In"
+    Team: "prod"
+spec:
+  replicas: 4
+  selector:
+    matchExpressions:
+      - {key: dc,operator: In, values: [IN]}
+      - {key: Team,operator: In, values: [prod]}
+  template:
+    metadata:
+      labels:
+        dc: IN
+        Team: prod
+    spec:
+      containers:
+        - name: "cont1-replica-temp"
+          image: httpd
+
+# Difference between replication Controler and Replica set is that Replica set do the monitoring over the nodes that are out of its scope too.
